@@ -12,7 +12,13 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-    ...
+     mainWindow = new BrowserWindow({titleBarStyle: 'hidden',
+    width: 1281,
+    height: 800,
+    minWidth: 1281,
+    minHeight: 800,
+    backgroundColor: '#312450',
+})                                  
 
     // Emitted when the window is closed.
     mainWindow.on('closed', function () {
