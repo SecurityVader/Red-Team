@@ -13,17 +13,27 @@ let mainWindow
 
 function createWindow () {
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 800, height: 600})
+  mainWindow = new BrowserWindow({titleBarStyle: 'hidden',
+    width: 1281,
+    height: 800,
+    minWidth: 1281,
+    minHeight: 800,
+    backgroundColor: '#312450',
+    show: false,
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
+  })
 
   // and load the index.html of the app.
-  mainWindow.loadURL(url.format({
-    pathname: path.join(__dirname, 'index.html'),
-    protocol: 'file:',
-    slashes: true
-  }))
+  mainWindow.loadURL(`file://${__dirname}/index.html`)
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //mainWindow.webContents.openDevTools()
+
+
+  // Show the mainwindow when it is loaded and ready to show
+  mainWindow.once('ready-to-show', () => {
+    mainWindow.show()
+  })
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -32,10 +42,23 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
-  
+
+  secondWindow = new BrowserWindow({frame: false,
+    width: 800,
+    height: 600,
+    minWidth: 800,
+    minHeight: 600,
+    backgroundColor: '#312450',
+    show: false,
+    icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
+    parent: mainWindow
+  })
+
+  secondWindow.loadURL(`file://${__dirname}/windows/ipcwindow.html`)
+
   require('./menu/mainmenu')
-  
 }
+
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
