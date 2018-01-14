@@ -12,51 +12,17 @@ const url = require('url')
 let mainWindow
 
 function createWindow () {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({titleBarStyle: 'hidden',
-    width: 1281,
-    height: 800,
-    minWidth: 1281,
-    minHeight: 800,
-    backgroundColor: '#C0C0C0',
-    show: false,
-    icon: path.join(__dirname, 'assets/icons/png/64x64.png')
-  })
+    ...
 
-  // and load the index.html of the app.
-  mainWindow.loadURL(`file://${__dirname}/index.html`)
+    // Emitted when the window is closed.
+    mainWindow.on('closed', function () {
+       // Dereference the window object, usually you would store windows
+       // in an array if your app supports multi windows, this is the time
+       // when you should delete the corresponding element.
+       mainWindow = null
+    })
 
-  // Open the DevTools.
-  //mainWindow.webContents.openDevTools()
-
-
-  // Show the mainwindow when it is loaded and ready to show
-  mainWindow.once('ready-to-show', () => {
-    mainWindow.show()
-  })
-
-  // Emitted when the window is closed.
-  mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
-    mainWindow = null
-  })
-
-  secondWindow = new BrowserWindow({frame: false,
-    width: 800,
-    height: 600,
-    minWidth: 800,
-    minHeight: 600,
-    backgroundColor: '#312450',
-    show: false,
-    icon: path.join(__dirname, 'assets/icons/png/64x64.png'),
-    parent: mainWindow
-  })
-
-  secondWindow.loadURL(`file://${__dirname}/windows/ipcwindow.html`)
-
-  require('./menu/mainmenu')
+    require('./menu/mainmenu')
 }
 
 
